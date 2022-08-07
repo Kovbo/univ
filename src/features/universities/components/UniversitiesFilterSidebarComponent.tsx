@@ -1,15 +1,9 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import Select from "react-select";
-import regions from "../api/filters";
+import regions from "../../../api/filters";
 
-function UniversitiesFilterSidebar() {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
+function UniversitiesFilterSidebarComponent() {
   return (
     <Card>
       <Card.Header>
@@ -51,4 +45,4 @@ function UniversitiesFilterSidebar() {
   );
 }
 
-export default UniversitiesFilterSidebar;
+export default UniversitiesFilterSidebarComponent;

@@ -1,20 +1,13 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { UniversitiesFilters } from "../../../api/models";
+import { useUniversitiesFilters } from "../context/UniversityFiltersProvider";
 import useUniversities from "../hooks/useUniversities";
 
 function UniversitiesListComponent() {
-  const query = "";
-
-  const [filters, setFilters] = React.useState<UniversitiesFilters>({
-    region: null,
-    value: "qwe",
-  });
+  const filters = useUniversitiesFilters();
 
   const { isLoading, error, data: universities } = useUniversities(filters);
-
-  console.log(universities);
 
   if (error) return <Card>Помилка при завантаження даних</Card>;
 
@@ -24,10 +17,11 @@ function UniversitiesListComponent() {
         <Card.Body className="pt-9 pb-0">
           <div className="d-flex flex-wrap flex-sm-nowrap mb-6">
             <div className="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
+              {/* {filters.state.university_type === 1} */}
               <img
                 className="mw-50px mw-lg-75px"
                 src="/school.svg"
-                alt="image"
+                alt="university_type"
               />
             </div>
             <div className="flex-grow-1">

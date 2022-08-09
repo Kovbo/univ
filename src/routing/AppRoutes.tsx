@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import App from "../App";
 import MasterLayout from "../layout/MasterLayout";
 import Home from "../pages/Home";
 import Universities from "../pages/Universities";

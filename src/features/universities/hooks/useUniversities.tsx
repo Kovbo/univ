@@ -1,10 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import { UniversitiesFilters } from "../../../api/models";
-import { getUniversities } from "../../../api/requests";
+import { getUniversities } from "../api/requests";
+import { IUniversitiesFiltersContextType } from "../models";
 
-export default function useUniversities(filters: UniversitiesFilters) {
-  return useQuery(["universities"], () => getUniversities(filters));
+export default function useUniversities(
+  filters: IUniversitiesFiltersContextType
+) {
+  return useQuery(
+    [
+      `universities_${filters.state.region.value}_${filters.state.university_type.value}`,
+    ],
+    () => getUniversities(filters),
+    {
+      cacheTime: 1,
+      keepPreviousData: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 }
-// export default function useUniversities(region: number | null) {
-//   return useQuery(["universities"], () => getUniversities(region));
-// }

@@ -1,4 +1,11 @@
-export default [
+export const universityTypes = [
+  { value: "1", label: "Заклади вищої освіти" },
+  { value: "2", label: "Заклади професійної (професійно-технічної) освіти" },
+  { value: "9", label: "Заклади фахової передвищої освіти" },
+  { value: "8", label: "Наукові інститути (установи)" },
+];
+
+export const regions = [
   { value: "01", label: "Автономна Республіка Крим" },
   { value: "05", label: "Вінницька область" },
   { value: "07", label: "Волинська область" },

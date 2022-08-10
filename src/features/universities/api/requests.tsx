@@ -9,7 +9,6 @@ const API_URL = process.env.REACT_APP_API_URL;
 const getUniversities = (
   filters: IUniversitiesFiltersContextType
 ): Promise<UniversitiesQueryResponse[]> => {
-  console.log(filters);
   return axios
     .get(
       `${API_URL}/universities/?ut=${

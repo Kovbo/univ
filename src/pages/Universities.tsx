@@ -1,4 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
+import { PageTitle } from "../context/PageDataProvider";
 import {
   UniversitiesList,
   UniversitiesFilterSidebar,
@@ -8,6 +9,7 @@ import { UniversityFiltersProvider } from "../features/universities/context/Univ
 function Universities() {
   return (
     <Container>
+      <PageTitle>Список університетів</PageTitle>
       <UniversityFiltersProvider>
         <Row>
           <Col xl={3}>

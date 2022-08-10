@@ -20,7 +20,7 @@ function UniversitiesListComponent() {
               {/* {filters.state.university_type === 1} */}
               <img
                 className="mw-50px mw-lg-75px"
-                src="/school.svg"
+                src={`/university_type/${filters.state.university_type.value}.png`}
                 alt="university_type"
               />
             </div>
@@ -94,7 +94,17 @@ function UniversitiesListComponent() {
     );
   });
 
-  return <div>{isLoading ? "Завантаження" : univsCards}</div>;
+  return (
+    <div>
+      {isLoading ? (
+        <Card className="d-flex flex-center">
+          <Card.Body className="pt-10">Завантаження</Card.Body>
+        </Card>
+      ) : (
+        univsCards
+      )}
+    </div>
+  );
 }
 
 export default UniversitiesListComponent;

@@ -1,0 +1,35 @@
+.navbar {
+  height: 65px;
+  left: 0;
+  padding: 0;
+  right: 0;
+  top: 0;
+  &.transparent {
+    background-color: transparent !important;
+  }
+  .container {
+    &.collapsed {
+      background-color: #fff;
+      padding-bottom: 10px;
+      z-index: 1;
+      border-bottom: var(--kt-header-desktop-fixed-border);
+    }
+  }
+}
+
+.header {
+  border-bottom: none !important;
+}
+#mobile-menu-sidebar {
+  width: 245px !important;
+}
+
+.menu-title {
+  color: #fff !important;
+}
+
+#mobile-menu-sidebar {
+  .menu-title {
+    color: var(--kt-text-gray-700) !important;
+  }
+}

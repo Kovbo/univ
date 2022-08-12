@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
-import PageTitleBar from "../components/PageTitleBar";
+import PageTitleBar from "./header/PageTitleBar";
 import { PageDataProvider } from "../context/PageDataProvider";
 import HeaderWrapper from "./header/HeaderWrapper";
 

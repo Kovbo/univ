@@ -8,4 +8,5 @@ export const UniversitiesList = () => {
 export const UniversitiesFilterSidebar = () => {
   return <UniversitiesFilterSidebarComponent />;
 };
+
 // export { UniversitiesList };

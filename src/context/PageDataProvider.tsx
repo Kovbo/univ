@@ -1,13 +1,18 @@
-import React, {
+import {
   createContext,
   FC,
   useContext,
   useEffect,
   useMemo,
   useReducer,
-  useState,
+  useRef,
 } from "react";
-import { initiaPageData, IPageDataContext, WithChildren } from "../models";
+import {
+  initiaPageData,
+  IPageBreadcrumbs,
+  IPageDataContext,
+  WithChildren,
+} from "../models";
 import { PAGE_DATA_ACTIONS } from "./PageDataActions";
 import { pageDataReducer } from "./PageDataReducer";
 
@@ -33,17 +38,26 @@ const PageDataProvider: FC<WithChildren> = ({ children }) => {
 const usePageData = () => useContext(PageDataContext);
 
 const PageTitle: FC<
-  { actionTitle?: string; actionLink?: string } & WithChildren
-> = ({ children, actionTitle, actionLink }) => {
-  const pageData = usePageData();
+  {
+    actionTitle?: string;
+    actionLink?: string;
+    pageBreadcrumbs?: Array<IPageBreadcrumbs>;
+  } & WithChildren
+> = ({ children, actionTitle, actionLink, pageBreadcrumbs }) => {
+  //I use Ref in order to prevent infilite reloads loop inside useEffect.
+  const pageDataRef = useRef(usePageData());
 
   useEffect(() => {
+    //Eslint suggests to use variable because the
+    const pageData = pageDataRef.current;
+
     pageData.dispatch({
       type: PAGE_DATA_ACTIONS.SET_PAGE_DATA,
       payload: {
         pageTitle: children ?? "",
         pageActionTitle: actionTitle ?? "",
         pageActionLink: actionLink ?? "",
+        pageBreadcrumbs: pageBreadcrumbs ?? "",
       },
     });
 
@@ -54,54 +68,11 @@ const PageTitle: FC<
           pageTitle: "",
           pageActionTitle: "",
           pageActionLink: "",
+          pageBreadcrumbs: null,
         },
       });
     };
-  }, [children]);
-
-  //     if (children) {
-  //       pageData.dispatch({
-  //         type: PAGE_DATA_ACTIONS.SET_PAGE_TITLE,
-  //         payload: children,
-  //       });
-  //     }
-  //     return () => {
-  //       pageData.dispatch({
-  //         type: PAGE_DATA_ACTIONS.SET_PAGE_TITLE,
-  //         payload: "",
-  //       });
-  //     };
-  //   }, [children]);
-
-  //   useEffect(() => {
-  //     if (actionTitle) {
-  //       pageData.dispatch({
-  //         type: PAGE_DATA_ACTIONS.SET_ACTION_TITLE,
-  //         payload: actionTitle,
-  //       });
-  //     }
-  //     return () => {
-  //       pageData.dispatch({
-  //         type: PAGE_DATA_ACTIONS.SET_ACTION_TITLE,
-  //         payload: "",
-  //       });
-  //     };
-  //   }, [children]);
-
-  //   useEffect(() => {
-  //     if (actionTitle) {
-  //       pageData.dispatch({
-  //         type: PAGE_DATA_ACTIONS.SET_ACTION_LINK,
-  //         payload: actionTitle,
-  //       });
-  //     }
-  //     return () => {
-  //       pageData.dispatch({
-  //         type: PAGE_DATA_ACTIONS.SET_ACTION_LINK,
-  //         payload: "",
-  //       });
-  //     };
-  //   }, [children]);
+  }, [children, actionLink, actionTitle, pageBreadcrumbs]);
 
   return <></>;
 };

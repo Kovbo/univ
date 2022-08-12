@@ -18,11 +18,4 @@ const getUniversities = (
     .then((d: AxiosResponse<UniversitiesQueryResponse[]>) => d.data);
 };
 
-// const getUniversityById = (id: ID): Promise<University | undefined> => {
-//     return axios
-//       .get(`${API_URL}/${id}`)
-//       .then((response: AxiosResponse<Response<University>>) => response.data)
-//       .then((response: Response<University>) => response.data)
-//   }
-
 export { getUniversities };

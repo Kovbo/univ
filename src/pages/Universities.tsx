@@ -5,11 +5,19 @@ import {
   UniversitiesFilterSidebar,
 } from "../features/universities";
 import { UniversityFiltersProvider } from "../features/universities/context/UniversityFiltersProvider";
+import { IPageBreadcrumbs } from "../models";
 
 function Universities() {
+  const breadcrumbs: Array<IPageBreadcrumbs> = [
+    {
+      title: "Головна",
+      path: "/",
+    },
+  ];
+
   return (
     <Container>
-      <PageTitle>Список університетів</PageTitle>
+      <PageTitle pageBreadcrumbs={breadcrumbs}>Список університетів</PageTitle>
       <UniversityFiltersProvider>
         <Row>
           <Col xl={3}>

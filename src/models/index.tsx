@@ -18,14 +18,18 @@ export type UniversitiesFilters = {
   region: number | null;
   value: string;
 };
-export interface PageData {
-  pageTitle?: string;
-  // setPageTitle: (_title: string) => void;
-  pageActionLink?: string;
-  // setPageActionLink: (_actionLink: string) => void;
-  pageActionTitle?: string;
-  // setPageActionTitle: (_actionTitle: string) => void;
+
+export interface IPageBreadcrumbs {
+  title: string;
+  path: string;
 }
+
+export type PageData = {
+  pageTitle: string;
+  pageActionLink: string;
+  pageActionTitle: string;
+  pageBreadcrumbs?: Array<IPageBreadcrumbs>;
+};
 
 export interface IPageDataContext {
   state: PageData;
@@ -33,7 +37,7 @@ export interface IPageDataContext {
 }
 
 export const initiaPageData: PageData = {
-  pageTitle: "qweqwe",
+  pageTitle: "",
   pageActionLink: "",
   pageActionTitle: "",
 };

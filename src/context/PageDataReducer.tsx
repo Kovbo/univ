@@ -1,4 +1,4 @@
-import { IPageDataContext, PageData } from "../models";
+import { PageData } from "../models";
 import { PAGE_DATA_ACTIONS } from "./PageDataActions";
 
 export function pageDataReducer(
@@ -11,6 +11,7 @@ export function pageDataReducer(
         pageTitle: action.payload.pageTitle,
         pageActionTitle: action.payload.pageActionTitle,
         pageActionLink: action.payload.pageActionLink,
+        pageBreadcrumbs: action.payload.pageBreadcrumbs,
       };
   }
 

@@ -2,6 +2,14 @@ export interface UniversityProps {
   university: IUniversity;
 }
 
+export type Educators = {
+  specialization_name: string;
+  speciality_code: number;
+  qualification_group_name: string;
+  speciality_name: string;
+  full_time_count: number;
+  part_time_count: number;
+};
 export interface IUniversity {
   university_name: string;
   university_id: string;
@@ -32,17 +40,8 @@ export interface IUniversity {
   close_date: string;
   primitki?: string;
   branches: [];
-  facultets: [];
-  educators: [
-    {
-      specialization_name: string;
-      speciality_code: number;
-      qualification_group_name: string;
-      speciality_name: string;
-      full_time_count: number;
-      part_time_count: number;
-    }
-  ];
+  facultets: [string];
+  educators: [Educators];
   profession_educators: [];
   profession_licenses: [];
   speciality_licenses: [];

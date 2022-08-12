@@ -1,13 +1,13 @@
-import React, { FC, useEffect, useState } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { FC, useState } from "react";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { UniversityProps } from "../models";
+import { UniversityEducatorsComponent } from "./UniversityEducatorsComponent";
+import { UniversityFacultiesComponent } from "./UniversityFacultiesComponent";
 
 export const UniversityInfoComponent: FC<UniversityProps> = ({
   university,
 }) => {
-  console.log(university);
-
   const typesMap: { [key: string]: number } = {
     "Заклад вищої освіти": 1,
     "Заклади професійної (професійно-технічної) освіти": 2,
@@ -15,86 +15,12 @@ export const UniversityInfoComponent: FC<UniversityProps> = ({
     "Наукові інститути (установи)": 8,
   };
 
-  const [showEducators, setShowEducators] = useState(true);
-  const [showFaculties, setShowFaculties] = useState(false);
+  const TABS = {
+    EDUCATORS: "educators",
+    FACULTIES: "faculties",
+  };
 
-  function switchTab(type: string) {
-    if (type === "educators") {
-      setShowEducators(true);
-      setShowFaculties(false);
-    }
-    if (type === "faculties") {
-      setShowEducators(false);
-      setShowFaculties(true);
-    }
-  }
-  const facultiesElement = (
-    <Card className="mb-10">
-      <Card.Header>
-        <Card.Title>Список факультетів:</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <Row>
-          {university.facultets.map((fac) => {
-            return (
-              <h3
-                key={fac}
-                className="text-gray-800 text-hover-primary fs-2 fw-bold me-3 mb-3"
-              >
-                {fac}
-              </h3>
-            );
-          })}
-        </Row>
-      </Card.Body>
-    </Card>
-  );
-
-  const educatorsElement = (
-    <Card className="mb-10">
-      <Card.Header>
-        <Card.Title>Освітні програми:</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <div className="table-responsive">
-          {/*begin::Table*/}
-          <table className="table table-flush align-middle table-row-bordered table-row-solid gy-4 gs-9">
-            {/*begin::Thead*/}
-            <thead className="border-gray-200 fs-5 fw-semibold bg-lighten">
-              <tr>
-                <th className="min-w-250px">Спеціальність</th>
-                <th className="min-w-100px">Освітній рівень</th>
-                <th className="min-w-150px">Назва програми</th>
-                <th className="min-w-150px">К-ть міць (денна форма)</th>
-                <th className="min-w-150px">К-ть міць (заочна форма)</th>
-              </tr>
-            </thead>
-            {university.educators.map((educator, index) => {
-              return (
-                <tbody key={index} className="fw-6 fw-semibold text-gray-600">
-                  <tr>
-                    <td>
-                      <a href="#" className="text-hover-primary text-gray-800">
-                        {educator.speciality_name}
-                      </a>
-                    </td>
-                    <td>
-                      <span className="badge badge-light-success fs-7 fw-bold">
-                        {educator.qualification_group_name}
-                      </span>
-                    </td>
-                    <td>{educator.specialization_name}</td>
-                    <td>{educator.full_time_count}</td>
-                    <td>{educator.part_time_count}</td>
-                  </tr>
-                </tbody>
-              );
-            })}
-          </table>
-        </div>
-      </Card.Body>
-    </Card>
-  );
+  const [activeTab, setActiveTab] = useState(TABS.EDUCATORS);
 
   return (
     <>
@@ -192,11 +118,11 @@ export const UniversityInfoComponent: FC<UniversityProps> = ({
                 <ul className="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold flex-nowrap">
                   <li
                     className="nav-item"
-                    onClick={() => switchTab("educators")}
+                    onClick={() => setActiveTab(TABS.EDUCATORS)}
                   >
                     <h3
                       className={`nav-link text-active-primary me-6 false ${
-                        showEducators && "active"
+                        activeTab === TABS.EDUCATORS && "active"
                       }`}
                     >
                       Освітні програми
@@ -204,11 +130,11 @@ export const UniversityInfoComponent: FC<UniversityProps> = ({
                   </li>
                   <li
                     className="nav-item"
-                    onClick={() => switchTab("faculties")}
+                    onClick={() => setActiveTab(TABS.FACULTIES)}
                   >
                     <h3
                       className={`nav-link text-active-primary me-6 false ${
-                        showFaculties && "active"
+                        activeTab === TABS.FACULTIES && "active"
                       }`}
                     >
                       Факультети
@@ -221,9 +147,13 @@ export const UniversityInfoComponent: FC<UniversityProps> = ({
         </Card.Body>
       </Card>
 
-      {showFaculties && facultiesElement}
+      {activeTab === TABS.FACULTIES && (
+        <UniversityFacultiesComponent faculties={university.facultets} />
+      )}
 
-      {showEducators && educatorsElement}
+      {activeTab === TABS.EDUCATORS && (
+        <UniversityEducatorsComponent educators={university.educators} />
+      )}
     </>
   );
 };

@@ -1,11 +1,23 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Loading from "../../../components/Loading";
 import { useUniversitiesFilters } from "../context/UniversityFiltersProvider";
 import useUniversities from "../hooks/useUniversities";
+import higher_img from "../../../assets/images/university_type/1.png";
+import professional_img from "../../../assets/images/university_type/2.png";
+import prehigher_img from "../../../assets/images/university_type/9.png";
+import institution_img from "../../../assets/images/university_type/8.png";
 
 function UniversitiesListComponent() {
   const filters = useUniversitiesFilters();
+
+  const imagesMap: { [key: string]: any } = {
+    "1": higher_img,
+    "2": professional_img,
+    "9": prehigher_img,
+    "8": institution_img,
+  };
 
   const { isLoading, error, data: universities } = useUniversities(filters);
 
@@ -17,10 +29,9 @@ function UniversitiesListComponent() {
         <Card.Body className="pt-9 pb-0">
           <div className="d-flex flex-wrap flex-sm-nowrap mb-6">
             <div className="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
-              {/* {filters.state.university_type === 1} */}
               <img
                 className="mw-50px mw-lg-75px"
-                src={`/university_type/${filters.state.university_type.value}.png`}
+                src={imagesMap[filters.state.university_type.value]}
                 alt="university_type"
               />
             </div>
@@ -94,17 +105,7 @@ function UniversitiesListComponent() {
     );
   });
 
-  return (
-    <div>
-      {isLoading ? (
-        <Card className="d-flex flex-center">
-          <Card.Body className="pt-10">Завантаження</Card.Body>
-        </Card>
-      ) : (
-        univsCards
-      )}
-    </div>
-  );
+  return <div>{isLoading ? <Loading /> : univsCards}</div>;
 }
 
 export default UniversitiesListComponent;

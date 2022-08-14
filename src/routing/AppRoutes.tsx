@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import MasterLayout from "../layout/MasterLayout";
 import Home from "../pages/Home";
 import Universities from "../pages/Universities";
@@ -9,14 +9,16 @@ const AppRoutes: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Home />} />
+
         <Route element={<MasterLayout />}>
-          <Route path="/" element={<Home />} />
           <Route path="/universities">
             <Route index element={<Universities />} />
             <Route path=":id" element={<University />} />
           </Route>
-          <Route path="*" element={<h1>Not Found</h1>} />
         </Route>
+
+        <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </BrowserRouter>
   );

@@ -33,9 +33,9 @@ export const UniversityEducatorsComponent: FC<UniversityFacultiesProps> = ({
                 <tbody key={index} className="fw-6 fw-semibold text-gray-600">
                   <tr>
                     <td>
-                      <a href="#" className="text-hover-primary text-gray-800">
+                      <span className="text-hover-primary text-gray-800">
                         {educator.speciality_name}
-                      </a>
+                      </span>
                     </td>
                     <td>
                       <span className="badge badge-light-success fs-7 fw-bold">

@@ -1,6 +1,5 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Card, Row } from "react-bootstrap";
-import { IUniversities } from "../../universities/models";
 
 type UniversityFacultiesProps = {
   faculties: [string];

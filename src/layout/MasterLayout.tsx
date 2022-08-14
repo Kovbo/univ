@@ -9,17 +9,19 @@ function MasterLayout() {
   return (
     <>
       {/* <ThemeModeProvider> */}
-      <PageDataProvider>
-        <HeaderWrapper />
-        <Container fluid>
-          <PageTitleBar></PageTitleBar>
-          <Container className="mt-10">
-            <Outlet />
+      <div id="master-wrapper">
+        <PageDataProvider>
+          <HeaderWrapper />
+          <Container fluid>
+            <PageTitleBar></PageTitleBar>
+            <Container className="mt-10">
+              <Outlet />
+            </Container>
+            {/* <Footer /> */}
           </Container>
-          {/* <Footer /> */}
-        </Container>
-      </PageDataProvider>
-      {/* </ThemeModeProvider> */}
+        </PageDataProvider>
+        {/* </ThemeModeProvider> */}
+      </div>
     </>
   );
 }

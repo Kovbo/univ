@@ -28,7 +28,7 @@ function UniversitiesFilterSidebarComponent() {
   }
 
   return (
-    <Card>
+    <Card className="mb-5">
       <Card.Header>
         <Card.Title>Фільтрація</Card.Title>
       </Card.Header>
@@ -36,7 +36,7 @@ function UniversitiesFilterSidebarComponent() {
 
       <Card.Body>
         <div className="mb-10">
-          <label className="form-label fw-semobold">Облість:</label>
+          <label className="form-label fw-semobold">Область:</label>
 
           <div>
             <Select

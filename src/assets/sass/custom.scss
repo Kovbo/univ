@@ -17,9 +17,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+#master-wrapper {
   background-image: url("../../../public/bg.jpeg");
   background-size: 100% 250px;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.home-backgound-photo {
+  background-image: url("../../../public/bg_home.png");
 }
 
 .navbar {
@@ -48,8 +54,16 @@ body {
   width: 245px !important;
 }
 
-.menu-title {
-  color: #fff !important;
+.menu-item {
+  .menu-link {
+    &.active {
+      // background-color: #009ef733;
+    }
+
+    .menu-title {
+      color: #fff !important;
+    }
+  }
 }
 
 #mobile-menu-sidebar {

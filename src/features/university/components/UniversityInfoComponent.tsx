@@ -4,15 +4,19 @@ import { Link } from "react-router-dom";
 import { UniversityProps } from "../models";
 import { UniversityEducatorsComponent } from "./UniversityEducatorsComponent";
 import { UniversityFacultiesComponent } from "./UniversityFacultiesComponent";
+import higher_img from "../../../assets/images/university_type/1.png";
+import professional_img from "../../../assets/images/university_type/2.png";
+import prehigher_img from "../../../assets/images/university_type/9.png";
+import institution_img from "../../../assets/images/university_type/8.png";
 
 export const UniversityInfoComponent: FC<UniversityProps> = ({
   university,
 }) => {
-  const typesMap: { [key: string]: number } = {
-    "Заклад вищої освіти": 1,
-    "Заклади професійної (професійно-технічної) освіти": 2,
-    "Заклади фахової передвищої освіти": 9,
-    "Наукові інститути (установи)": 8,
+  const typesImagesMap: { [key: string]: any } = {
+    "Заклад вищої освіти": higher_img,
+    "Заклади професійної (професійно-технічної) освіти": professional_img,
+    "Заклади фахової передвищої освіти": prehigher_img,
+    "Наукові інститути (установи)": institution_img,
   };
 
   const TABS = {
@@ -30,9 +34,7 @@ export const UniversityInfoComponent: FC<UniversityProps> = ({
             <div className="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
               <img
                 className="mw-50px mw-lg-75px"
-                src={`/university_type/${
-                  typesMap[university.university_type_name] || 1
-                }.png`}
+                src={typesImagesMap[university.university_type_name] || 1}
                 alt="university_type"
               />
             </div>

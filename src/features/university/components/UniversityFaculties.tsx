@@ -5,7 +5,7 @@ type UniversityFacultiesProps = {
   faculties: [string];
 };
 
-export const UniversityFacultiesComponent: FC<UniversityFacultiesProps> = ({
+export const UniversityFaculties: FC<UniversityFacultiesProps> = ({
   faculties,
 }) => {
   return (

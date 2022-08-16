@@ -6,7 +6,7 @@ type UniversityFacultiesProps = {
   educators: [Educators];
 };
 
-export const UniversityEducatorsComponent: FC<UniversityFacultiesProps> = ({
+export const UniversityEducators: FC<UniversityFacultiesProps> = ({
   educators,
 }) => {
   return (

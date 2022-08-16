@@ -9,7 +9,7 @@ import professional_img from "../../../assets/images/university_type/2.png";
 import prehigher_img from "../../../assets/images/university_type/9.png";
 import institution_img from "../../../assets/images/university_type/8.png";
 
-function UniversitiesListComponent() {
+export function UniversitiesList() {
   const filters = useUniversitiesFilters();
 
   const imagesMap: { [key: string]: any } = {
@@ -107,5 +107,3 @@ function UniversitiesListComponent() {
 
   return <div>{isLoading ? <Loading /> : univsCards}</div>;
 }
-
-export default UniversitiesListComponent;

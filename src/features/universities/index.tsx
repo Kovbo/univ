@@ -1,12 +1,3 @@
-import UniversitiesFilterSidebarComponent from "./components/UniversitiesFilterSidebarComponent";
-import UniversitiesListComponent from "./components/UniversitiesListComponent";
-
-export const UniversitiesList = () => {
-  return <UniversitiesListComponent />;
-};
-
-export const UniversitiesFilterSidebar = () => {
-  return <UniversitiesFilterSidebarComponent />;
-};
-
-// export { UniversitiesList };
+export { UniversitiesList } from "./components/UniversitiesList";
+export { UniversitiesFilterSidebar } from "./components/UniversitiesFilterSidebar";
+export * as filtersData from "./api/filters";

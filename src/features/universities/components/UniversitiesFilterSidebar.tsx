@@ -5,7 +5,7 @@ import { regions, universityTypes } from "../api/filters";
 import { FILTERS_ACTIONS } from "../context/FiltersActions";
 import { useUniversitiesFilters } from "../context/UniversityFiltersProvider";
 
-function UniversitiesFilterSidebarComponent() {
+export function UniversitiesFilterSidebar() {
   const filters = useUniversitiesFilters();
 
   function regionFilterInputHandler(
@@ -70,5 +70,3 @@ function UniversitiesFilterSidebarComponent() {
     </Card>
   );
 }
-
-export default UniversitiesFilterSidebarComponent;

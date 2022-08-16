@@ -2,20 +2,18 @@ import { FC, useState } from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { UniversityProps } from "../models";
-import { UniversityEducatorsComponent } from "./UniversityEducatorsComponent";
-import { UniversityFacultiesComponent } from "./UniversityFacultiesComponent";
+import { UniversityEducators } from "./UniversityEducators";
+import { UniversityFaculties } from "./UniversityFaculties";
 import higher_img from "../../../assets/images/university_type/1.png";
 import professional_img from "../../../assets/images/university_type/2.png";
 import prehigher_img from "../../../assets/images/university_type/9.png";
 import institution_img from "../../../assets/images/university_type/8.png";
 
-export const UniversityInfoComponent: FC<UniversityProps> = ({
-  university,
-}) => {
+export const UniversityInfo: FC<UniversityProps> = ({ university }) => {
   const typesImagesMap: { [key: string]: any } = {
     "Заклад вищої освіти": higher_img,
-    "Заклади професійної (професійно-технічної) освіти": professional_img,
-    "Заклади фахової передвищої освіти": prehigher_img,
+    "Заклад професійної (професійно-технічної) освіти": professional_img,
+    "Заклад фахової передвищої освіти": prehigher_img,
     "Наукові інститути (установи)": institution_img,
   };
 
@@ -34,7 +32,9 @@ export const UniversityInfoComponent: FC<UniversityProps> = ({
             <div className="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
               <img
                 className="mw-50px mw-lg-75px"
-                src={typesImagesMap[university.university_type_name] || 1}
+                src={
+                  typesImagesMap[university.university_type_name] || higher_img
+                }
                 alt="university_type"
               />
             </div>
@@ -150,11 +150,11 @@ export const UniversityInfoComponent: FC<UniversityProps> = ({
       </Card>
 
       {activeTab === TABS.FACULTIES && (
-        <UniversityFacultiesComponent faculties={university.facultets} />
+        <UniversityFaculties faculties={university.facultets} />
       )}
 
       {activeTab === TABS.EDUCATORS && (
-        <UniversityEducatorsComponent educators={university.educators} />
+        <UniversityEducators educators={university.educators} />
       )}
     </>
   );

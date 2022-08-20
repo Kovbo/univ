@@ -1,19 +1,51 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
+import { useTranslation } from "react-i18next";
 import { regions, universityTypes } from "../features/universities/api/filters";
+import { useState } from "react";
 
 const DEFAULT_FILTERS = {
   REGION: "80",
   TYPE: "1",
 };
 
-// const link = {
-//   pathname: "/universities",
-//   param1: "Par1",
-// };
-
 function Home() {
+  const { t } = useTranslation();
+  const [selectedRegion, setSelectedRegion] = useState<string | undefined>(
+    DEFAULT_FILTERS.REGION
+  );
+  const [selectedType, setSelectedType] = useState<string | undefined>(
+    DEFAULT_FILTERS.TYPE
+  );
+
+  const universityTypesTranslated = universityTypes.map((type) =>
+    translateFilter(type)
+  );
+
+  const regionsTranslated = regions.map((region) => translateFilter(region));
+
+  function translateFilter(item: { value: string; label: string }) {
+    return {
+      ...item,
+      label: t(item.label),
+    };
+  }
+
+  // let selectedRegion: string | undefined = "";
+  // let selectedType: string | number | undefined = "";
+
+  function regionFilterInputHandler(
+    e: SingleValue<{ value: string; label: string }>
+  ) {
+    setSelectedRegion(e?.value);
+  }
+
+  function universityTypeFilterInputHandler(
+    e: SingleValue<{ value: string; label: string }>
+  ) {
+    setSelectedType(e?.value);
+  }
+
   return (
     <div
       className="d-flex flex-column flex-root"
@@ -27,41 +59,49 @@ function Home() {
               <form className="form w-100" id="kt_new_password_form" action="#">
                 <div className="text-start mb-10">
                   <h1 className="text-dark mb-10 fs-3x">
-                    База даних ВНЗ України
+                    {t("Home page header")}
                   </h1>
                   <div className="text-gray-400 fw-semibold fs-6">
-                    Оберіть область:
+                    {t("Choose region:")}
                   </div>
                   <Select
-                    defaultValue={regions.filter(
-                      (el) => el.value === DEFAULT_FILTERS.REGION
-                    )}
-                    options={regions}
+                    defaultValue={
+                      regionsTranslated.filter(
+                        (el) => el.value === DEFAULT_FILTERS.REGION
+                      )[0]
+                    }
+                    onChange={regionFilterInputHandler}
+                    options={regionsTranslated}
                   />
                 </div>
 
                 <div className="text-start mb-10">
                   <div className="text-gray-400 fw-semibold fs-6">
-                    Оберіть тип навчального закладу:
+                    {t("Choose university type:")}
                   </div>
                   <Select
                     defaultValue={
-                      universityTypes.filter(
+                      universityTypesTranslated.filter(
                         (el) => el.value === DEFAULT_FILTERS.TYPE
                       )[0]
                     }
-                    options={universityTypes}
+                    onChange={universityTypeFilterInputHandler}
+                    options={universityTypesTranslated}
                   />
                 </div>
 
                 <div className="fv-row mb-10"></div>
                 <div className="d-flex flex-stack">
-                  <Link to="/universities">
+                  <Link
+                    to={`/universities?region=${selectedRegion}&type=${selectedType}`}
+                  >
                     <button
                       id="kt_new_password_submit"
                       className="btn btn-primary"
                     >
-                      <span className="indicator-label">Пошук</span>
+                      <span className="indicator-label">
+                        {t("Show results")}
+                      </span>
                     </button>
                   </Link>
                 </div>

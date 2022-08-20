@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Card, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 type UniversityFacultiesProps = {
   faculties: [string];
@@ -8,10 +9,11 @@ type UniversityFacultiesProps = {
 export const UniversityFaculties: FC<UniversityFacultiesProps> = ({
   faculties,
 }) => {
+  const { t } = useTranslation();
   return (
     <Card className="mb-10">
       <Card.Header>
-        <Card.Title>Список факультетів:</Card.Title>
+        <Card.Title>{t("Faculties list")}:</Card.Title>
       </Card.Header>
       <Card.Body>
         <Row>

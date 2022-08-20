@@ -11,7 +11,7 @@ export default function useUniversities(
     ],
     () => getUniversities(filters),
     {
-      cacheTime: 1,
+      cacheTime: 0,
       keepPreviousData: false,
       refetchOnWindowFocus: false,
     }

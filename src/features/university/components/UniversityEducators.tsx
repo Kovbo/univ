@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Card } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { Educators } from "../models";
 
 type UniversityFacultiesProps = {
@@ -9,10 +10,11 @@ type UniversityFacultiesProps = {
 export const UniversityEducators: FC<UniversityFacultiesProps> = ({
   educators,
 }) => {
+  const { t } = useTranslation();
   return (
     <Card className="mb-10">
       <Card.Header>
-        <Card.Title>Освітні програми:</Card.Title>
+        <Card.Title>{t("Programs")}:</Card.Title>
       </Card.Header>
       <Card.Body>
         <div className="table-responsive">
@@ -21,11 +23,11 @@ export const UniversityEducators: FC<UniversityFacultiesProps> = ({
             {/*begin::Thead*/}
             <thead className="border-gray-200 fs-5 fw-semibold bg-lighten">
               <tr>
-                <th className="min-w-250px">Спеціальність</th>
-                <th className="min-w-100px">Освітній рівень</th>
-                <th className="min-w-150px">Назва програми</th>
-                <th className="min-w-150px">К-ть міць (денна форма)</th>
-                <th className="min-w-150px">К-ть міць (заочна форма)</th>
+                <th className="min-w-250px">{t("Specialty")}</th>
+                <th className="min-w-100px">{t("Educational level")}</th>
+                <th className="min-w-150px">{t("Name of the program")}</th>
+                <th className="min-w-150px">{t("Full-time places")}</th>
+                <th className="min-w-150px">{t("Part-time places")}</th>
               </tr>
             </thead>
             {educators.map((educator, index) => {
@@ -39,7 +41,7 @@ export const UniversityEducators: FC<UniversityFacultiesProps> = ({
                     </td>
                     <td>
                       <span className="badge badge-light-success fs-7 fw-bold">
-                        {educator.qualification_group_name}
+                        {t(educator.qualification_group_name)}
                       </span>
                     </td>
                     <td>{educator.specialization_name}</td>

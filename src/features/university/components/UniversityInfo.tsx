@@ -8,6 +8,7 @@ import higher_img from "../../../assets/images/university_type/1.png";
 import professional_img from "../../../assets/images/university_type/2.png";
 import prehigher_img from "../../../assets/images/university_type/9.png";
 import institution_img from "../../../assets/images/university_type/8.png";
+import { useTranslation } from "react-i18next";
 
 export const UniversityInfo: FC<UniversityProps> = ({ university }) => {
   const typesImagesMap: { [key: string]: any } = {
@@ -23,7 +24,7 @@ export const UniversityInfo: FC<UniversityProps> = ({ university }) => {
   };
 
   const [activeTab, setActiveTab] = useState(TABS.EDUCATORS);
-
+  const { t, i18n } = useTranslation();
   return (
     <>
       <Card key={university.university_id} className="mb-5 university">
@@ -46,20 +47,22 @@ export const UniversityInfo: FC<UniversityProps> = ({ university }) => {
                       to={"/universities/" + university.university_id}
                       className="text-gray-800 text-hover-primary fs-2 fw-bold me-3"
                     >
-                      {university.university_name}
+                      {i18n.language === "en"
+                        ? university.university_name_en
+                        : university.university_name}{" "}
                     </Link>
                   </div>
                   <div className="d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-600">
                     {university.university_short_name}
                   </div>
                   <div className="d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-600">
-                    {university.university_type_name}
+                    {t(university.university_type_name)}
                   </div>
                   <div className="d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-600">
-                    Факультетів: {university.facultets.length}
+                    {t("Faculties")}: {university.facultets.length}
                   </div>
                   <div className="d-flex flex-wrap fw-semibold mb-4 fs-5 pb-5 text-gray-600">
-                    Світніх програм: {university.educators.length}
+                    {t("Programs")}: {university.educators.length}
                   </div>
                   <div className="d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-600">
                     {university.university_phone}
@@ -81,10 +84,12 @@ export const UniversityInfo: FC<UniversityProps> = ({ university }) => {
                   <div className="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                     <div className="d-flex align-items-center">
                       <div className="fs-4 fw-bold">
-                        {university.koatuu_name_u}
+                        {t(university.koatuu_name_u)}
                       </div>
                     </div>
-                    <div className="fw-semibold fs-6 text-gray-400">Місто</div>{" "}
+                    <div className="fw-semibold fs-6 text-gray-400">
+                      {t("City")}
+                    </div>{" "}
                   </div>
                   <div className="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                     <div className="d-flex align-items-center">
@@ -92,7 +97,9 @@ export const UniversityInfo: FC<UniversityProps> = ({ university }) => {
                         {university.university_address_u}
                       </div>
                     </div>
-                    <div className="fw-semibold fs-6 text-gray-400">Адреса</div>{" "}
+                    <div className="fw-semibold fs-6 text-gray-400">
+                      {t("Address")}
+                    </div>{" "}
                   </div>
                   <div className="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                     <div className="d-flex align-items-center">
@@ -101,17 +108,17 @@ export const UniversityInfo: FC<UniversityProps> = ({ university }) => {
                       </div>
                     </div>
                     <div className="fw-semibold fs-6 text-gray-400">
-                      Рік заснування
+                      {t("Established in")}
                     </div>
                   </div>
                   <div className="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                     <div className="d-flex align-items-center">
                       <div className="fs-4 fw-bold">
-                        {university.university_financing_type_name}
+                        {t(university.university_financing_type_name)}
                       </div>
                     </div>
                     <div className="fw-semibold fs-6 text-gray-400">
-                      Власність
+                      {t("Ownership")}
                     </div>
                   </div>
                 </div>
@@ -127,7 +134,7 @@ export const UniversityInfo: FC<UniversityProps> = ({ university }) => {
                         activeTab === TABS.EDUCATORS && "active"
                       }`}
                     >
-                      Освітні програми
+                      {t("Programs")}
                     </h3>
                   </li>
                   <li
@@ -139,7 +146,7 @@ export const UniversityInfo: FC<UniversityProps> = ({ university }) => {
                         activeTab === TABS.FACULTIES && "active"
                       }`}
                     >
-                      Факультети
+                      {t("Faculties")}
                     </h3>
                   </li>
                 </ul>

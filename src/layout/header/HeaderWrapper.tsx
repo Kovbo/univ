@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo_univ.png";
 
 function HeaderWrapper() {
+  const { t, i18n } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: { target: any }) => {
@@ -23,6 +25,17 @@ function HeaderWrapper() {
   const handleMobileMenuToggle = () => {
     document.getElementById("mobile-menu-sidebar")?.classList.add("drawer-on");
   };
+
+  const changeLanguage = () => {
+    if (i18n.language === "en") {
+      i18n.changeLanguage("uk");
+      localStorage.setItem("language", "uk");
+    } else {
+      i18n.changeLanguage("en");
+      localStorage.setItem("language", "en");
+    }
+  };
+
   return (
     <>
       <div
@@ -36,12 +49,12 @@ function HeaderWrapper() {
         >
           <div className="menu-item me-lg-1">
             <Link className="menu-link py-3" to="/">
-              <span className="menu-title">Головна</span>
+              <span className="menu-title">{t("Home menu")}</span>
             </Link>
           </div>
           <div className="menu-item me-lg-1">
             <Link className="menu-link py-3" to="/universities">
-              <span className="menu-title">Університети</span>
+              <span className="menu-title">{t("Universities menu")}</span>
             </Link>
           </div>
         </div>
@@ -85,7 +98,7 @@ function HeaderWrapper() {
               <img alt="Logo" src={logo} className="logo-default h-50px" />
             </Link>
           </div>
-          <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+          <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1 d-none d-lg-block d-xl-block">
             <div className="d-flex align-items-stretch" id="kt_header_nav">
               <div className="header-menu align-items-stretch">
                 <div
@@ -94,17 +107,70 @@ function HeaderWrapper() {
                 >
                   <div className="menu-item me-lg-1">
                     <Link className="menu-link py-3" to="/">
-                      <span className="menu-title">Головна</span>
+                      <span className="menu-title">{t("Home menu")}</span>
                     </Link>
                   </div>
                   <div className="menu-item me-lg-1">
                     <Link className="menu-link py-3" to="/universities">
-                      <span className="menu-title">Університети</span>
+                      <span className="menu-title">
+                        {t("Universities menu")}
+                      </span>
                     </Link>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div
+            className="app-navbar flex-shrink-0"
+            onClick={() => changeLanguage()}
+          >
+            {i18n.language === "uk" && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 60 30"
+                width="24"
+                height="12"
+              >
+                <clipPath id="s">
+                  <path d="M0,0 v30 h60 v-30 z" />
+                </clipPath>
+                <clipPath id="t">
+                  <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z" />
+                </clipPath>
+                <g clipPath="url(#s)">
+                  <path d="M0,0 v30 h60 v-30 z" fill="#012169" />
+                  <path
+                    d="M0,0 L60,30 M60,0 L0,30"
+                    stroke="#fff"
+                    strokeWidth="6"
+                  />
+                  <path
+                    d="M0,0 L60,30 M60,0 L0,30"
+                    clipPath="url(#t)"
+                    stroke="#C8102E"
+                    strokeWidth="4"
+                  />
+                  <path
+                    d="M30,0 v30 M0,15 h60"
+                    stroke="#fff"
+                    strokeWidth="10"
+                  />
+                  <path
+                    d="M30,0 v30 M0,15 h60"
+                    stroke="#C8102E"
+                    strokeWidth="6"
+                  />
+                </g>
+              </svg>
+            )}
+
+            {i18n.language === "en" && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="14">
+                <rect width="24" height="7" fill="#005BBB" />
+                <rect width="24" height="7" y="7" fill="#FFD500" />
+              </svg>
+            )}
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import Error from "../components/Error";
 import Loading from "../components/Loading";
@@ -10,16 +11,17 @@ import { IPageBreadcrumbs } from "../models";
 
 function University() {
   const { id } = useParams();
+  const { t, i18n } = useTranslation();
 
   const { isLoading, isError, data: university } = useUniversity(id);
 
   const breadcrumbs: Array<IPageBreadcrumbs> = [
     {
-      title: "Головна",
+      title: t("Home menu"),
       path: "/",
     },
     {
-      title: "Университети",
+      title: t("Universities menu"),
       path: "/universities",
     },
   ];
@@ -27,7 +29,10 @@ function University() {
   return (
     <Container>
       <PageTitle pageBreadcrumbs={breadcrumbs}>
-        {university?.university_short_name || "Університет"}
+        {i18n.language === "en"
+          ? university?.university_name_en
+          : university?.university_short_name}
+        {/* {university?.university_short_name || t("University")} */}
       </PageTitle>
 
       <Row>

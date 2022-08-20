@@ -1,4 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { PageTitle } from "../context/PageDataProvider";
 import {
   UniversitiesList,
@@ -8,16 +9,19 @@ import { UniversityFiltersProvider } from "../features/universities/context/Univ
 import { IPageBreadcrumbs } from "../models";
 
 function Universities() {
+  const { t } = useTranslation();
   const breadcrumbs: Array<IPageBreadcrumbs> = [
     {
-      title: "Головна",
+      title: t("Home menu"),
       path: "/",
     },
   ];
 
   return (
     <Container>
-      <PageTitle pageBreadcrumbs={breadcrumbs}>Список університетів</PageTitle>
+      <PageTitle pageBreadcrumbs={breadcrumbs}>
+        {t("Universities list")}
+      </PageTitle>
       <UniversityFiltersProvider>
         <Row>
           <Col xl={3}>

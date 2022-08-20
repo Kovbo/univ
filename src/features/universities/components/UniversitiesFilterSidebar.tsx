@@ -1,12 +1,19 @@
-import React from "react";
 import { Card } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import Select, { SingleValue } from "react-select";
-import { regions, universityTypes } from "../api/filters";
 import { FILTERS_ACTIONS } from "../context/FiltersActions";
 import { useUniversitiesFilters } from "../context/UniversityFiltersProvider";
+import useSelectableFilters from "../hooks/useSelectableFilters";
 
 export function UniversitiesFilterSidebar() {
   const filters = useUniversitiesFilters();
+  const { t } = useTranslation();
+  const {
+    selectedRegion,
+    selectedUniversityType,
+    regionsTranslated,
+    universityTypesTranslated,
+  } = useSelectableFilters();
 
   function regionFilterInputHandler(
     e: SingleValue<{ value: string; label: string }>
@@ -15,7 +22,6 @@ export function UniversitiesFilterSidebar() {
       type: FILTERS_ACTIONS.REGION_UPDATE,
       payload: { value: e?.value, label: e?.label },
     });
-    console.log(filters);
   }
 
   function universityTypeFilterInputHandler(
@@ -30,39 +36,33 @@ export function UniversitiesFilterSidebar() {
   return (
     <Card className="mb-5">
       <Card.Header>
-        <Card.Title>Фільтрація</Card.Title>
+        <Card.Title>{t("Filters card title")}</Card.Title>
       </Card.Header>
       <div className="separator border-gray-200"></div>
 
       <Card.Body>
         <div className="mb-10">
-          <label className="form-label fw-semobold">Область:</label>
+          <label className="form-label fw-semobold">{t("Region")}:</label>
 
           <div>
             <Select
-              defaultValue={
-                regions.filter(
-                  (el) => el.value === filters.state.region.value
-                )[0]
-              }
+              value={selectedRegion}
               onChange={regionFilterInputHandler}
-              options={regions}
+              options={regionsTranslated}
             />
           </div>
         </div>
 
         <div className="mb-10">
-          <label className="form-label fw-semobold">Тип закладу освіти:</label>
+          <label className="form-label fw-semobold">
+            {t("University type")}:
+          </label>
 
           <div>
             <Select
-              defaultValue={
-                universityTypes.filter(
-                  (el) => el.value === filters.state.university_type.value
-                )[0]
-              }
+              value={selectedUniversityType}
               onChange={universityTypeFilterInputHandler}
-              options={universityTypes}
+              options={universityTypesTranslated}
             />
           </div>
         </div>
